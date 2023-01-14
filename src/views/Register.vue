@@ -35,6 +35,7 @@
 
 <script>
 import AppValidationErrors from '@/components/ValidationErrors.vue'
+import { actionTypes } from '@/store/modules/auth'
 
 export default {
     name: 'AppRegister',
@@ -58,7 +59,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$store.dispatch('register', {
+            this.$store.dispatch(actionTypes.register, {
                 email: this.email,
                 password: this.password,
                 username: this.username
