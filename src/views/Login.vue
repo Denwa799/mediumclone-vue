@@ -3,18 +3,14 @@
         <div class="container page">
             <div class="row">
                 <div class="col-md-6 offset-md-3 col-xs-12">
-                    <h1 class="text-xs-center">Sign Up</h1>
+                    <h1 class="text-xs-center">Sign in</h1>
                     <p class="text-xs-center">
-                        <router-link to="login">
-                            Nave an account?
+                        <router-link to="register">
+                            Need an account?
                         </router-link>
                     </p>
                     <app-validation-errors v-if="validationErrors" :validation-errors="validationErrors" />
                     <form @submit.prevent="onSubmit">
-                        <fieldset class="form-group">
-                            <input class="form-control form-control-lg" type="text" placeholder="Username"
-                                v-model="username" />
-                        </fieldset>
                         <fieldset class="form-group">
                             <input class="form-control form-control-lg" type="text" placeholder="Email"
                                 v-model="email" />
@@ -24,7 +20,7 @@
                                 v-model="password" />
                         </fieldset>
                         <button class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">
-                            Sign Up
+                            Sign in
                         </button>
                     </form>
                 </div>
@@ -39,7 +35,7 @@ import AppValidationErrors from '@/components/ValidationErrors.vue'
 import { actionTypes } from '@/store/modules/auth'
 
 export default {
-    name: 'AppRegister',
+    name: 'AppLogin',
     components: {
         AppValidationErrors
     },
@@ -47,7 +43,6 @@ export default {
         return {
             email: '',
             password: '',
-            username: ''
         }
     },
     computed: mapState({
@@ -56,10 +51,9 @@ export default {
     }),
     methods: {
         onSubmit() {
-            this.$store.dispatch(actionTypes.register, {
+            this.$store.dispatch(actionTypes.login, {
                 email: this.email,
                 password: this.password,
-                username: this.username
             })
                 .then(() => {
                     this.$router.push({ name: 'home' })
