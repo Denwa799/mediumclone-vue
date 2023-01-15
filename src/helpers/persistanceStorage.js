@@ -8,8 +8,6 @@ export const getItem = (key) => {
 }
 
 export const setItem = (key, data) => {
-  console.log(key)
-  console.log(data)
   try {
     localStorage.setItem(key, JSON.stringify(data))
   } catch (error) {
