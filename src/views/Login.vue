@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+import { getterTypes } from '@/store/modules/auth'
 import AppValidationErrors from '@/components/ValidationErrors.vue'
 import { actionTypes } from '@/store/modules/auth'
 
@@ -45,10 +46,12 @@ export default {
             password: '',
         }
     },
-    computed: mapState({
-        isSubmitting: state => state.auth.isSubmitting,
-        validationErrors: state => state.auth.validationErrors
-    }),
+    computed: {
+        ...mapGetters({
+            isSubmitting: getterTypes.isSubmitting,
+            validationErrors: getterTypes.validationErrors,
+        })
+    },
     methods: {
         onSubmit() {
             this.$store.dispatch(actionTypes.login, {
